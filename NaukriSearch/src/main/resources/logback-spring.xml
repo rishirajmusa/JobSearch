@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Base log path (change this to your actual path) -->
+    <property name="LOG_PATH" value="/Users/rishiraj/Downloads/workspace/logs" />
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [${springAppName}] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Rolling File Appender (hourly rotation) -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${springAppName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- New file every hour -->
+            <fileNamePattern>${LOG_PATH}/archive/${springAppName}.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <maxHistory>48</maxHistory> <!-- Keep 2 days of hourly logs -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [${springAppName}] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger for your package -->
+    <logger name="com.cpt" level="INFO" additivity="false">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
