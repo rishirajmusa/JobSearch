@@ -66,24 +66,28 @@ public class JobCheckService {
                     loginHelp.login(driver);
                     Thread.sleep(3000);
                 } catch (Exception e) {
+                	emailService.sendEmail("Exception Happened", "Exception happend at login");
                     logger.error("Login failed", e);
                 }
 
                 try {
                     designationHelp.designationFiller(wait);
                 } catch (Exception e) {
+                	emailService.sendEmail("Exception Happened", "Exception happend at designation");
                     logger.error("Designation fill failed", e);
                 }
 
                 try {
                     experienceHelper.experienceFiller(wait);
                 } catch (Exception e) {
+                	emailService.sendEmail("Exception Happened", "Exception happend at experience");
                     logger.error("Experience fill failed", e);
                 }
 
                 try {
                     sortingHelper.sorting(wait);
                 } catch (Exception e) {
+                	emailService.sendEmail("Exception Happened", "Exception happend at sorting");
                     logger.error("Sorting failed", e);
                 }
 
@@ -109,6 +113,7 @@ public class JobCheckService {
                 try {
                     sortingHelper.sorting(wait);
                 } catch (Exception e) {
+                	emailService.sendEmail("Exception Happened", "Exception happend at sorting  again");
                     logger.warn("Sorting failed after refresh. Trying login again...", e);
 
                     try {
@@ -117,18 +122,21 @@ public class JobCheckService {
                         loginHelp.login(driver);
                         Thread.sleep(3000);
                     } catch (Exception loginEx) {
+                    	emailService.sendEmail("Exception Happened", "Exception happend at login again");
                         logger.error("Login retry failed", loginEx);
                     }
 
                     try {
                         designationHelp.designationFiller(wait);
                     } catch (Exception e1) {
+                    	emailService.sendEmail("Exception Happened", "Exception happend at login again");
                         logger.error("Designation fill failed", e1);
                     }
 
                     try {
                         experienceHelper.experienceFiller(wait);
                     } catch (Exception e2) {
+                    	emailService.sendEmail("Exception Happened", "Exception happend at experience again");
                         logger.error("Experience fill failed", e2);
                     }
                 }
@@ -138,12 +146,14 @@ public class JobCheckService {
                 try {
                     sortingHelper.sorting(wait);
                 } catch (Exception e) {
+                	emailService.sendEmail("Exception Happened", "Exception happend at sorting third");
                     logger.error("Final sorting failed", e);
                 }
 
                 try {
                     getJobHelper.selectJavaJob(driver, emailService);
                 } catch (Exception e) {
+                	emailService.sendEmail("Exception Happened", "Exception happend at sending email");
                     logger.error("Job selection or email failed", e);
                 }
 
@@ -153,12 +163,4 @@ public class JobCheckService {
         }
     }
 }
-
-
-
-
-
-
-
-
 

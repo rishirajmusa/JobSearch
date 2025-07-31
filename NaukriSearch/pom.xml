@@ -17,14 +17,14 @@
 <id>dev</id>
 <properties>
 <spring.profiles.active>dev</spring.profiles.active>
-<log4j2.path>/var/lib/tomcat/logs/cpt/paypal-provider-service</log4j2.path>
+<log4j2.path>/var/lib/tomcat/logs/cpt/jobsearch</log4j2.path>
 </properties>
 </profile>
 <profile>
 <id>prod</id>
 <properties>
 <spring.profiles.active>prod</spring.profiles.active>
-<log4j2.path>/var/lib/tomcat/logs/cpt/paypal-provider-service</log4j2.path>
+<log4j2.path>/var/lib/tomcat/logs/cpt/jobsearch</log4j2.path>
 </properties>
 </profile>
 </profiles>
